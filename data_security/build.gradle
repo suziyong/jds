@@ -20,6 +20,7 @@ repositories {
 }
 
 dependencies {
+    compile group: 'cn.hutool', name: 'hutool-all', version: '5.4.2'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
