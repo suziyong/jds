@@ -1,6 +1,6 @@
 package com.czm.security.service.impl;
 
-import com.czm.security.common.SnowflakeId;
+import cn.hutool.core.lang.Snowflake;
 import com.czm.security.service.IdService;
 import org.springframework.stereotype.Service;
 
@@ -31,7 +31,7 @@ public class IdServiceImpl implements IdService {
      */
     @Override
     public List<Long> generateBatchId(long worker, long dataCenter, int number) {
-        SnowflakeId snowflakeId = new SnowflakeId(worker, dataCenter);
+        Snowflake snowflakeId = new Snowflake(worker, dataCenter);
         List<Long> result = new ArrayList<>();
         for (int i = 0; i < number; i++) {
             result.add(snowflakeId.nextId());
@@ -50,7 +50,7 @@ public class IdServiceImpl implements IdService {
      */
     @Override
     public long generateId(long worker, long dataCenter) {
-        SnowflakeId snowflakeId = new SnowflakeId(worker, dataCenter);
+        Snowflake snowflakeId = new Snowflake(worker, dataCenter);
         return snowflakeId.nextId();
     }
 
@@ -64,7 +64,7 @@ public class IdServiceImpl implements IdService {
      */
     @Override
     public Long getWorkerNum(Long id) {
-        SnowflakeId snowflakeId = new SnowflakeId(0, 0);
+        Snowflake snowflakeId = new Snowflake(0, 0);
         return snowflakeId.getWorkerId(id);
     }
 
@@ -78,7 +78,7 @@ public class IdServiceImpl implements IdService {
      */
     @Override
     public Long getDataCenterNum(Long id) {
-        SnowflakeId snowflakeId = new SnowflakeId(0, 0);
+        Snowflake snowflakeId = new Snowflake(0, 0);
         return snowflakeId.getDataCenterId(id);
     }
 
@@ -92,7 +92,7 @@ public class IdServiceImpl implements IdService {
      */
     @Override
     public String getGenerateDateTime(Long id) {
-        SnowflakeId snowflakeId = new SnowflakeId(0, 0);
+        Snowflake snowflakeId = new Snowflake(0, 0);
         long generateDateTimeLong = snowflakeId.getGenerateDateTime(id);
         LocalDateTime generateLocalDateTime = LocalDateTime.ofEpochSecond(generateDateTimeLong, 0, ZoneOffset.ofHours(8));
         return generateLocalDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
